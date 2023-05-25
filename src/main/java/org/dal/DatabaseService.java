@@ -1,13 +1,12 @@
-package org.example;
+package org.dal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * stub  for
- * creating a database object
+ * stub for database
  */
-public class Database {
+public class DatabaseService {
     public boolean saveData(List<Task> tasks) {
         return true;
     }

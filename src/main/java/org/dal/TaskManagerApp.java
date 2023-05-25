@@ -1,35 +1,57 @@
-package org.example;
+package org.dal;
 
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class containing methods
+ * to print tasks, main method taking user input
+ * and perform task operations accordingly and
+ * also methods to save and load data from database
+ */
 public class TaskManagerApp {
 
     private static List<Task> tasks = null;
     private static final Scanner input = new Scanner(System.in);
 
-    public static Database database = DatabaseConnection.makeConnection();
+    /**
+     * DatabaseService object obtained from makeConnection method of DatabaseConnection
+     */
+    public static DatabaseService databaseService = DatabaseConnection.makeConnection();
 
+    /**
+     * this method helps to save tasks in database
+     * @param tasks list containing all the tasks of the user
+     */
     public static void saveTasksInDatabase(List<Task> tasks){
-
-        database.saveData(tasks);
+        databaseService.saveData(tasks);
     }
 
-    public static void loadTasksFromDatabase(){
-        database.loadData();
+    /**
+     * this method helps to load tasks from database
+     */
+    public static void loadTasksFromDatabase(){databaseService.loadData();
     }
 
+    /**
+     * this method prints all tasks on console
+     * @param tasks list containing all the tasks of the user
+     */
     public static void showAllTasks(List<Task> tasks){
 
         System.out.println("----------List of tasks------------");
         System.out.println("   Task Id    |   Task Name   |   Task Priority   |   Task Deadline   ");
-        for (Task task : tasks) {
+        for (org.dal.Task task : tasks) {
             System.out.format("%14s|%15s|%19s|%19s", Integer.valueOf(task.getTaskId()).toString(),
                     task.getTaskName(), Integer.valueOf(task.getPriority()).toString(),
                     task.getDeadline().toString());
             System.out.println();
         }
     }
+
+    /**
+     * main method
+     */
     public static void main(String[] args) {
         System.out.println("----------------Welcome to the Task Manager application----------------------");
         TaskManager taskManager = new TaskManager(input);

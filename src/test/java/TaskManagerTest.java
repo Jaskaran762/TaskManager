@@ -1,16 +1,24 @@
-import org.example.Task;
-import org.example.TaskManager;
+import org.dal.Task;
+import org.dal.TaskManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+/**
+ * this class contains all the unit tests for
+ * testing the behaviour of methods of
+ * TaskManager class. Mockito is used
+ * to mock the Scanner(input from the user).
+ */
 public class TaskManagerTest {
 
-    private static Scanner scannerMock = mock(Scanner.class);
+    private static final Scanner scannerMock = mock(Scanner.class);
     private static TaskManager test = null;
     public static Task task = null;
 

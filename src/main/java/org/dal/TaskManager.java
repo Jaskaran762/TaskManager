@@ -1,4 +1,4 @@
-package org.example;
+package org.dal;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ import java.util.Scanner;
  * This class provide basic functionality
  * to this console-based app. Contains methods to
  * add or edit a task, change deadline and also priority of
- * a task
+ * a task.
  */
 public class TaskManager {
 
@@ -23,11 +23,11 @@ public class TaskManager {
     }
 
     /**
-     * this method helps to add a task
+     * this method helps to add a task.
      * @return List containing tasks added by the user
      */
     public List<Task> addTask(){
-        Task task = new Task();
+        org.dal.Task task = new Task();
 
         if (tasks == null) {
             task.setTaskId(1);
@@ -45,7 +45,7 @@ public class TaskManager {
 
     /**
      * this method helps to edit the complete task
-     * created by the user
+     * created by the user.
      * @param taskId belonging to the task which the user
      *               wants to edit
      * @return reference to the task which has been edited
@@ -60,22 +60,22 @@ public class TaskManager {
 
     /**
      * this method helps to change
-     * deadline of a task
+     * deadline of a task.
+     *
      * @param taskId belonging to the task which the user
      *               wants to edit
-     * @return reference to the task which has been updated
      */
-    public Task changeDeadlineOfTask(int taskId){
+    public void changeDeadlineOfTask(int taskId){
 
-        Optional<Task> requiredTask = getTaskOptionalById(taskId);
+        Optional<org.dal.Task> requiredTask = getTaskOptionalById(taskId);
 
         requiredTask.ifPresent(task -> setDeadlineInTask(task, input));
-        return requiredTask.get();
     }
 
     /**
-     * this method changes priority of a task
-     * @param taskId
+     * this method changes priority of a task.
+     * @param taskId belonging to the task which the user
+     *              wants to edit
      * @return reference to the task which has been updated
      */
     public Task changePriorityOfTask(int taskId){
@@ -90,9 +90,10 @@ public class TaskManager {
     }
 
     /**
-     *
-     * @param task
-     * @param input
+     *this method helps to set task attributes
+     * according to the input from the user.
+     * @param task reference to the Task object
+     * @param input reference to the Scanner class
      */
     private void setTaskAttributes(Task task, Scanner input) {
         System.out.println("Enter a task name to store");
@@ -107,6 +108,12 @@ public class TaskManager {
         task.setTaskType(input.nextLine());
     }
 
+    /**
+     * this method helps to set a deadline to a task.
+     * Date entered by the user should be in format 'DD-MM-YYYY-hh-mm-ss'.
+     * @param task reference to the Task object
+     * @param input reference to the Scanner class
+     */
     private void setDeadlineInTask(Task task, Scanner input) {
         System.out.println("Enter task deadline in format \"DD-MM-YYYY-hh-mm-ss\" like \"17-05-2023-13-34-23\"");
         String userEnteredDate = input.nextLine();
@@ -132,6 +139,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * this method returns the reference to the Task class object
+     * based on the task id entered by the user.
+     * @param taskId belonging to the task which the user
+     *      *              wants to edit
+     * @return reference to the task if present
+     */
     private Optional<Task> getTaskOptionalById(int taskId) {
         return tasks.stream().filter(task -> task.getTaskId() == taskId).findAny();
     }
