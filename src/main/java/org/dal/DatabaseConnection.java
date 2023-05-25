@@ -6,7 +6,7 @@ package org.dal;
  */
 public interface DatabaseConnection {
 
-    public static DatabaseService makeConnection(){
+    static DatabaseService makeConnection(){
         return new DatabaseService();
     }
 }

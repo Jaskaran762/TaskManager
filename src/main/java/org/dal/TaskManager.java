@@ -74,11 +74,11 @@ public class TaskManager {
 
     /**
      * this method changes priority of a task.
+     *
      * @param taskId belonging to the task which the user
-     *              wants to edit
-     * @return reference to the task which has been updated
+     *               wants to edit
      */
-    public Task changePriorityOfTask(int taskId){
+    public void changePriorityOfTask(int taskId){
 
         Optional<Task> requiredTask = getTaskOptionalById(taskId);
 
@@ -86,7 +86,7 @@ public class TaskManager {
             System.out.println("Enter task priority ranging from 1 to 10, 10 being least important");
             requiredTask.get().setPriority(Integer.parseInt(input.nextLine()));
         }
-        return requiredTask.get();
+        requiredTask.get();
     }
 
     /**
