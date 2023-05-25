@@ -27,7 +27,7 @@ public class TaskManager {
      * @return List containing tasks added by the user
      */
     public List<Task> addTask(){
-        org.dal.Task task = new Task();
+        Task task = new Task();
 
         if (tasks == null) {
             task.setTaskId(1);
@@ -67,7 +67,7 @@ public class TaskManager {
      */
     public void changeDeadlineOfTask(int taskId){
 
-        Optional<org.dal.Task> requiredTask = getTaskOptionalById(taskId);
+        Optional<Task> requiredTask = getTaskOptionalById(taskId);
 
         requiredTask.ifPresent(task -> setDeadlineInTask(task, input));
     }

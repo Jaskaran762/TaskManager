@@ -41,7 +41,7 @@ public class TaskManagerApp {
 
         System.out.println("----------List of tasks------------");
         System.out.println("   Task Id    |   Task Name   |   Task Priority   |   Task Deadline   ");
-        for (org.dal.Task task : tasks) {
+        for (Task task : tasks) {
             System.out.format("%14s|%15s|%19s|%19s", Integer.valueOf(task.getTaskId()).toString(),
                     task.getTaskName(), Integer.valueOf(task.getPriority()).toString(),
                     task.getDeadline().toString());
