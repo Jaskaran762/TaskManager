@@ -22,11 +22,18 @@ public class TaskManagerTest {
     private static TaskManager test = null;
     public static Task task = null;
 
+    /**
+     * this method helps to create a instance of TaskManager
+     */
     @BeforeAll
     public static void inputSetup(){
 
         test = new TaskManager(scannerMock);
     }
+
+    /**
+     * method to test addTask()
+     */
     @Test
     public void checkAddTask(){
 
@@ -41,6 +48,9 @@ public class TaskManagerTest {
         verify(scannerMock).nextInt();
     }
 
+    /**
+     * method to test editCompleteTask()
+     */
     @Test
     public void checkEditCompleteTask(){
 
@@ -58,6 +68,9 @@ public class TaskManagerTest {
         verify(scannerMock, times(2)).nextInt();
     }
 
+    /**
+     * method to test changeDeadlineOfTask()
+     */
     @Test
     public void checkChangeDeadlineOfTask(){
 
@@ -75,6 +88,9 @@ public class TaskManagerTest {
         verify(scannerMock, times(4)).nextLine();
     }
 
+    /**
+     * method to test changePriorityOfTask
+     */
     @Test
     public void checkChangePriorityOfTask(){
 
