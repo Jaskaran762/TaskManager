@@ -5,6 +5,7 @@
 ### Source Classes
 
 [TaskManagerApp](src/main/java/org/dal/TaskManagerApp.java)
+####### *To start this app, run commands javac TaskManagerApp.java, and then java TaskManagerApp*
 
 [TaskManager](src/main/java/org/dal/TaskManager.java)
 
