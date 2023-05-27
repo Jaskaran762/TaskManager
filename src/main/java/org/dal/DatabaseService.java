@@ -12,6 +12,6 @@ public class DatabaseService {
     }
 
     public List<Task> loadData(){
-        return new ArrayList<Task>();
+        return new ArrayList<>();
     }
 }

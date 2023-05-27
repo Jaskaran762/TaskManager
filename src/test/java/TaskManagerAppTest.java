@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,7 +65,7 @@ public class TaskManagerAppTest {
 
         verify(databaseServiceMock).saveData(tasksCaptor.capture());
         assertEquals(tasks, tasksCaptor.getValue());
-        assertEquals(true, result, "status of tasks saving to database");
+        assertTrue(result, "status of tasks saving to database");
     }
 
     /**
