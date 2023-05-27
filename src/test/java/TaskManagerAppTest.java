@@ -3,6 +3,7 @@ import org.dal.Task;
 import org.dal.TaskManagerApp;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -55,22 +56,26 @@ public class TaskManagerAppTest {
      * this method helps to test the functionality of saveTasksInDatabase() method
      */
     @Test
+    @Order(1)
     public void checkSaveTasksInDatabase(){
         when(databaseServiceMock.saveData(tasks)).thenReturn(true);
 
-        TaskManagerApp.saveTasksInDatabase(tasks);
+        boolean result = TaskManagerApp.saveTasksInDatabase(tasks);
 
         verify(databaseServiceMock).saveData(tasksCaptor.capture());
         assertEquals(tasks, tasksCaptor.getValue());
+        assertEquals(true, result, "status of tasks saving to database");
     }
 
     /**
      * this method helps to test the functionality of loadTasksFromDatabase() method
      */
     @Test
+    @Order(2)
     public void checkLoadTasksFromDatabase(){
         when(databaseServiceMock.loadData()).thenReturn(tasks);
         TaskManagerApp.loadTasksFromDatabase();
+
         verify(databaseServiceMock).loadData();
     }
 }

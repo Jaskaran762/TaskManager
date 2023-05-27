@@ -23,7 +23,7 @@ public class TaskManagerTest {
     public static Task task = null;
 
     /**
-     * this method helps to create a instance of TaskManager
+     * this method helps to create an instance of TaskManager
      */
     @BeforeAll
     public static void inputSetup(){
@@ -41,6 +41,8 @@ public class TaskManagerTest {
         when(scannerMock.nextLine()).thenReturn("My first task","4","22-06-2023-13-34-23", "study");
 
         task = test.addTask().get(0);
+
+
         assertEquals("My first task", task.getTaskName(),"Task Name check ");
         assertEquals(4, task.getPriority(), "Task priority check ");
 

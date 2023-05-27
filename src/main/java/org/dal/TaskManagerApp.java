@@ -23,8 +23,8 @@ public class TaskManagerApp {
      * this method helps to save tasks in database
      * @param tasks list containing all the tasks of the user
      */
-    public static void saveTasksInDatabase(List<Task> tasks){
-        databaseService.saveData(tasks);
+    public static boolean saveTasksInDatabase(List<Task> tasks){
+        return databaseService.saveData(tasks);
     }
 
     /**
