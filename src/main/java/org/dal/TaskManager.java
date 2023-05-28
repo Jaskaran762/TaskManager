@@ -2,10 +2,7 @@ package org.dal;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This class provide basic functionality
@@ -40,6 +37,37 @@ public class TaskManager {
 
         tasks.add(task);
 
+        return tasks;
+    }
+
+    /**
+     * this method helps to add a task.
+     * @param task task which needs to be added to the list of task
+     * @return list containing all the tasks
+     */
+    public List<Task> addTask(Task task){
+
+        if (tasks == null) {
+            task.setTaskId(1);
+            tasks = new ArrayList<>();
+        }
+        else {
+            task.setTaskId(tasks.size() + 1);
+        }
+        tasks.add(task);
+        return tasks;
+    }
+
+    /**
+     * this method helps to delete a task from the list of tasks
+     * @param taskId id of the task which needs to be deleted
+     * @return list after the task has been deleted
+     */
+    public List<Task> deleteTask(Integer taskId){
+
+        Optional<Task> task = getTaskOptionalById(taskId);
+        if (task.isPresent())
+            tasks.remove(task.get());
         return tasks;
     }
 
@@ -90,12 +118,33 @@ public class TaskManager {
     }
 
     /**
+     * this method will return tasks in priority
+     * @param userTasks tasks entered by the user
+     * @return tasks sorted according to the priority
+     */
+    public List<Task> tasksInPriority(List<Task> userTasks){
+        List<Task> tasks = new ArrayList<>(userTasks);
+        return tasks.stream().sorted(Comparator.comparing(Task::getPriority)).toList();
+        //return tasks.stream().sorted((task1, task2) -> ((Integer)task1.getPriority()).compareTo(task2.getPriority())).toList();
+    }
+
+    /**
+     * this method will return tasks according to the deadline
+     * @param userTasks tasks entered by the user
+     * @return tasks sorted according to the deadline
+     */
+    public List<Task> tasksAccordingToDeadline(List<Task> userTasks){
+        List<Task> tasks = new ArrayList<>(userTasks);
+        return tasks.stream().sorted(Comparator.comparing(Task::getDeadline)).toList();
+    }
+
+    /**
      *this method helps to set task attributes
      * according to the input from the user.
      * @param task reference to the Task object
      * @param input reference to the Scanner class
      */
-    private void setTaskAttributes(Task task, Scanner input) {
+    private void setTaskAttributes(Task task, Scanner input){
         System.out.println("Enter a task name to store");
         task.setTaskName(input.nextLine());
 
@@ -148,5 +197,13 @@ public class TaskManager {
      */
     private Optional<Task> getTaskOptionalById(int taskId) {
         return tasks.stream().filter(task -> task.getTaskId() == taskId).findAny();
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 }

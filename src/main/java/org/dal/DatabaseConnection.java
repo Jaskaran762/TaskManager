@@ -7,6 +7,6 @@ package org.dal;
 public interface DatabaseConnection {
 
     static DatabaseService makeConnection(){
-        return new DatabaseService();
+        return DatabaseService.getInstance();
     }
 }

@@ -16,8 +16,7 @@ import org.mockito.quality.Strictness;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +36,8 @@ public class TaskManagerAppTest {
     @Captor
     private ArgumentCaptor<List<Task>> tasksCaptor;
 
+    private static TaskManagerApp app;
+
     /**
      * this method helps to initialize list of tasks
      */
@@ -46,11 +47,11 @@ public class TaskManagerAppTest {
     }
 
     /**
-     * method helps to create a mock of DatabaseService
+     * method helps to pass mock of DatabaseService to TaskManagerApp class
      */
     @BeforeEach
     public void dbSetup(){
-        TaskManagerApp.databaseService = databaseServiceMock;
+        TaskManagerApp.setDatabaseService(databaseServiceMock);
     }
 
     /**
@@ -78,5 +79,18 @@ public class TaskManagerAppTest {
         TaskManagerApp.loadTasksFromDatabase();
 
         verify(databaseServiceMock).loadData();
+    }
+
+    /**
+     * this method helps to test the functionality of deleteTasksFromDatabase() method
+     */
+    @Test
+    @Order(3)
+    public void checkDeleteTasksFromDatabase(){
+        when(databaseServiceMock.deleteData(tasks)).thenReturn(false);
+        boolean result = TaskManagerApp.deleteTasksFromDatabase(tasks);
+        assertFalse(result);
+
+        verify(databaseServiceMock).deleteData(tasks);
     }
 }
